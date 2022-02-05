@@ -1,0 +1,10 @@
+package com.optional;
+
+public class OptionalPrueba {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,6 @@
+package com.referencia;
+
+public interface IUser {
+
+	User crear(Strin nombre);
+}

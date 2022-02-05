@@ -1,0 +1,25 @@
+package com.referencia;
+
+public class ReferenciaMetodo {
+
+	public static void main(String[] args) {
+		
+		/*
+		 * Referencia a       Class::staticMethod     Math:abs      n -> Math.abs(n)
+		 * static method
+		 */
+		
+		Trabajo trabajo = new Trabajo() {
+			@Override
+			public void accion() {
+				User.referenciaAMetodoEstatico();
+			}
+		};
+		
+		Trabajo trabajoL = () -> User.referenciaAMetodoEstatico();
+		Trabajo trabajoMR = User::referenciaAMetodoEstatico;
+		
+
+	}
+
+}

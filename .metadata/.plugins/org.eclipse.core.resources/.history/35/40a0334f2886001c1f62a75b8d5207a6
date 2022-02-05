@@ -1,0 +1,14 @@
+package com.optional;
+
+public class OptionalPrueba {
+
+	public static void main(String[] args) {
+		
+		probarOptional(nulll);
+	}
+	
+	public static void probarOptional(String nombre) {
+		System.out.println(nombre.length());
+	}
+
+}

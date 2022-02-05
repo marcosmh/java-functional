@@ -1,0 +1,5 @@
+package com.referencia;
+
+public interface Trabajo {
+
+}

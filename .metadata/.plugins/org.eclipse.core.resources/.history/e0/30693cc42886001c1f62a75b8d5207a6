@@ -1,0 +1,19 @@
+package com.optional;
+
+public class OptionalPrueba {
+
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
+	public static void main(String[] args) {
+		
+		probarOptional(null);
+	}
+	
+	public static void probarOptional(String nombre) {
+		System.out.println(nombre.length());
+	}
+
+}

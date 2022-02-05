@@ -1,0 +1,32 @@
+package com.optional;
+
+import java.util.Optional;
+
+public class OptionalPrueba {
+
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
+	public static void main(String[] args) {
+		
+		probarOptional("");
+	}
+	
+	public static void probarOptional(String nombre) {
+		System.out.println(nombre.length());
+	}
+	
+	public static void crearOptional() {
+		Optional<String> optional  = Optional.empty();
+		optional.get();
+	}
+	
+	public static void orElseOptional(String nombre) {
+		Optional<String> optional  = Optional.ofNullable(nombre);
+		Optional<String> optional2  = Optional.of(nombre);
+		String nombereOfOptional.orElse("x");
+	}
+
+}

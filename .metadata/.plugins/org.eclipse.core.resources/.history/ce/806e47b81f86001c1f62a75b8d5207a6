@@ -1,0 +1,11 @@
+package com.referencia;
+
+public class User {
+	
+	private String nombre;
+	
+	public User(String nombre) {
+		this.nombre = nombre;
+	}
+
+}

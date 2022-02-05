@@ -1,0 +1,7 @@
+package com.lambda;
+
+public interface PorDefecto {
+
+	void mostrarNombre(String nombre);
+	String nombrePorDefecto(String nombre);
+}

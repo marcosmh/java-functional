@@ -1,0 +1,12 @@
+package com.lambda;
+
+public class Lambda {
+
+	public static String main(String[] args) {
+		
+		
+	}
+	
+	
+
+}
