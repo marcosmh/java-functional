@@ -1,5 +1,5 @@
-INDEX VERSION 1.131+/Users/marcosmh/DevTraining/java-functional/.metadata/.plugins/org.eclipse.jdt.core
-408564619.index
-3245002012.index
-3135993271.index
-3156422177.index
+INDEX VERSION 1.131+C:\opt\workspace\java-functional\.metadata\.plugins\org.eclipse.jdt.core
+981837304.index
+1942325927.index
+2681038603.index
+485099434.index

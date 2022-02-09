@@ -16,57 +16,22 @@ public class StreamsTest {
 		setupUser();
 		// Stream stream = Stream.of(users);
 
-		// foreach
-		// users.stream().forEach( e -> e.setNombre( e.getNombre() + " X" ) );
-		// imprimirLista();
+		
+		//testForEach();
 
-		// map
-		/*
-		 * List<String> lista = users.stream() .map( e -> e.getNombre() )
-		 * .collect(Collectors.toList());
-		 * 
-		 * lista.stream().forEach(e -> System.out.println(e));
-		 */
+		//testMap();
+		
+		//testFilter();
+		
+		//testFindFirst();
+		
+		//testFlatMap();
+		
+		//testPeek();
 
-		// Filters
-		/*
-		 * List<User> userFilter = users.stream() .filter(e -> e.getNombre() !=
-		 * "Marcos") .filter(e -> e.getId() < 3) .collect(Collectors.toList());
-		 * userFilter.stream().forEach(e->
-		 * System.out.println(e.getId()+" "+e.getNombre()));
-		 */
-
-		// FindFirst
-		/*
-		 * User user = users.stream() .filter(e-> e.getNombre().equals("Marcos"))
-		 * .findFirst() .orElse(null); System.out.println( user.getId() + " "
-		 * +user.getNombre());
-		 */
-
-		// FlatMap
-		/*
-		 * List<List<String>> nombresVariasLitas = new ArrayList<List<String>> (
-		 * Arrays.asList( new ArrayList<String>(Arrays.asList("Marcos","Luis","Fer")),
-		 * new ArrayList<String>(Arrays.asList("Juan","Pedro","Kile")) ) );
-		 * 
-		 * List<String> nombresUnicaLista = nombresVariasLitas.stream()
-		 * .flatMap(e->e.stream()).collect(Collectors.toList());
-		 * 
-		 * nombresUnicaLista.stream().forEach(e-> System.out.println(e));
-		 */
-
-		// Peek
-		/*
-		 * List<User> usersPeek = users.stream() .peek(e-> e.setNombre( e.getNombre() +
-		 * " Apellido")) .collect(Collectors.toList());
-		 * 
-		 * usersPeek.stream().forEach(e->
-		 * System.out.println(e.getId()+" "+e.getNombre()));
-		 */
-
-		// Count
-		long numeroFiltrado = users.stream().filter(e -> e.getId() < 3).count();
-		System.out.println("numeroFiltrado: " + numeroFiltrado);
+		//testCount();
+		
+		testSkipLimit();
 
 	}
 
@@ -85,24 +50,72 @@ public class StreamsTest {
 	}
 
 	private static void testForEach() {
-		// foreach
-		System.out.println("use ForEach");
+		System.out.println("---------  use ForEach --------- ");
 		users.stream().forEach(e -> e.setNombre(e.getNombre() + " X"));
 		imprimirLista();
 	}
 
 	private static void testMap() {
-		System.out.println("use Map");
+		System.out.println("---------  use Map --------- ");
 		List<String> lista = users.stream().map(e -> e.getNombre()).collect(Collectors.toList());
 		lista.stream().forEach(e -> System.out.println(e));
 
 	}
 
 	private static void testFilter() {
-		System.out.println("use Filter");
+		System.out.println(" ---------  use Filter --------- ");
 		User user = users.stream().filter(e -> e.getNombre().equals("Marcos")).findFirst().orElse(null);
 		System.out.println(user.getId() + " " + user.getNombre());
 
+	}
+	
+	private static void testFindFirst() {
+		System.out.println("---------  use findFirst --------- ");
+		  User user = users.stream() .filter(e-> e.getNombre().equals("Marcos"))
+		                                             .findFirst() .orElse(null); 
+		  System.out.println( user.getId() + " "+user.getNombre());
+	}
+	
+	private static void testFlatMap() {
+		System.out.println("---------  use flatMap --------- ");
+		List<List<String>> nombresVariasLitas = new ArrayList<List<String>>(
+				Arrays.asList(
+						new ArrayList<String>(Arrays.asList("Marcos", "Luis", "Fer")),
+						new ArrayList<String>(Arrays.asList("Juan", "Pedro", "Kile"))));
+
+		List<String> nombresUnicaLista = nombresVariasLitas.stream().flatMap(e -> e.stream())
+				.collect(Collectors.toList());
+
+		nombresUnicaLista.stream().forEach(e -> System.out.println(e));
+
+	}
+	
+	
+	private static void testPeek() {
+		System.out.println("---------  use peek --------- ");
+		List<User> usersPeek = users.stream().peek(e -> e.setNombre(e.getNombre() + " Apellido"))
+				.collect(Collectors.toList());
+
+		usersPeek.stream().forEach(e -> System.out.println(e.getId() + " " + e.getNombre()));
+
+	}
+	
+	private static void testCount() {
+		System.out.println("--------- use count --------- ");
+		long numeroFiltrado = users.stream().filter(e -> e.getId() < 3).count();
+		System.out.println("numeroFiltrado: " + numeroFiltrado);
+	}
+	
+	
+	private static void testSkipLimit() {
+		System.out.println("--------- use slkip and limit --------- ");
+		String[] abc = {  "a", "b", "c", "d", "e", "f", "g", "h", "i", "j"  };
+		List<String> abcFilter = Arrays.stream(abc)
+				.skip(2)
+				.limit(4)
+				.collect(Collectors.toList());
+		
+		abcFilter.stream().forEach(e->System.out.println(e));
 	}
 
 }
