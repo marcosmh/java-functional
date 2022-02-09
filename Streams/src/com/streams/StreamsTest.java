@@ -2,9 +2,13 @@ package com.streams;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.DoubleSummaryStatistics;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class StreamsTest {
@@ -31,7 +35,25 @@ public class StreamsTest {
 
 		//testCount();
 		
-		testSkipLimit();
+		//testSkipLimit();
+		
+		//testSort();
+		
+		//testMinMax();
+		
+		//testDistinct();
+		
+		//testAllMatchAnyMatchNoneMatch();
+		
+		//testSumAverageRange();
+		
+		//testReduce();
+		
+		//testJoining();
+		
+		//testToSet();
+				
+		testSummarizingDouble();
 
 	}
 
@@ -42,6 +64,7 @@ public class StreamsTest {
 		users.add(new User(3, "Carlos"));
 		users.add(new User(4, "Mario"));
 		users.add(new User(5, "Hector"));
+		users.add(new User(6, "Marcos"));
 
 	}
 
@@ -116,6 +139,119 @@ public class StreamsTest {
 				.collect(Collectors.toList());
 		
 		abcFilter.stream().forEach(e->System.out.println(e));
+	}
+	
+	private static void testSort() {
+		System.out.println("--------- use sort --------- ");
+		users = users.stream()
+				.sorted(Comparator.comparing(User::getNombre))
+				.collect(Collectors.toList());
+		imprimirLista();
+		
+		
+	}
+	
+	private static void testMinMax() {
+		System.out.println("--------- use min and max --------- ");
+		User userMin = users.stream()
+				.min(Comparator.comparing(User::getId))
+				.orElse(null);
+		System.out.println("userMin= " + userMin.getId());
+		
+		User userMax = users.stream()
+				.max(Comparator.comparing(User::getId))
+				.orElse(null);
+		System.out.println("userMax= " + userMax.getId());
+		
+	}
+	
+	private static void testDistinct() {
+		System.out.println("--------- use distinct --------- ");
+		String[] abc = {  "a", "b", "c", "d", "e", "f", "g", "h", "i", "j" ,"a" ,"b","c"};
+		List<String> abcFilter = Arrays.stream(abc)
+				.distinct().collect(Collectors.toList());
+		
+		abcFilter.stream().forEach(e -> System.out.println(e));
+		
+	}
+	
+	private static void testAllMatchAnyMatchNoneMatch() {
+		System.out.println("--------- use alMatch - anyMatch - noneMatch --------- ");
+		List<Integer> listaNumeros = Arrays.asList(100,300,900,5000);
+		
+		boolean allMatch = listaNumeros.stream().allMatch(e -> e > 301);
+		System.out.println("allMatch= " + allMatch);
+		
+		boolean anyMatch = listaNumeros.stream().anyMatch(e -> e > 301);
+		System.out.println("anyMatch= " + anyMatch);
+		
+		boolean noneMatch = listaNumeros.stream().noneMatch(e->e>10000);
+		System.out.println("noneMatch= " + noneMatch);
+				
+	}
+	
+	private static void testSumAverageRange() {
+		System.out.println("--------- use sum - average - range --------- ");
+		double result = users.stream()
+			.mapToInt(User::getId)
+			.average()
+			.orElse(0);
+		System.out.println("average= " + result);
+		
+		result = users.stream()
+				.mapToInt(User::getId)
+				.sum();
+		System.out.println("sum= " + result);
+		
+		System.out.println("range= " + IntStream.range(0, 100).sum());
+	}
+	
+	
+	private static void testReduce() {
+		System.out.println("--------- use reduce --------- ");
+		int numero = users.stream()
+				.map(User::getId)
+				.reduce(100, Integer::sum);
+		
+		System.out.println("reduce= " + numero);
+	}
+	
+	
+	private static void testJoining() {
+		System.out.println("--------- use joining --------- ");
+		String names = users.stream()
+				.map(User::getNombre)
+				.collect(Collectors.joining(" - "))
+				.toString();
+		System.out.println("joining= " + names);
+		
+	}
+	
+	private static void testToSet() {
+		System.out.println("--------- use toSet --------- ");
+		Set<String> setNames = users.stream()
+				.map(User::getNombre)
+				.collect(Collectors.toSet());
+		
+		setNames.stream().forEach(e-> System.out.println(e));
+	}
+	
+	private static void testSummarizingDouble() {
+		System.out.println("--------- use summarizingDouble --------- ");
+		DoubleSummaryStatistics statistics = users.stream()
+				.collect(Collectors.summarizingDouble(User::getId));
+		
+		System.out.println("average=  "+statistics.getAverage()
+		+ "  max= " + statistics.getMax() + "  min= " + statistics.getMin()+"  count= "+statistics.getCount() 
+		+ "  sum= "+statistics.getSum());
+		
+		DoubleSummaryStatistics statistics1 = users.stream()
+				.mapToDouble(User::getId)
+				.summaryStatistics();
+		
+		System.out.println("average=  "+statistics1.getAverage()
+		+ "  max= " + statistics1.getMax() + "  min= " + statistics1.getMin()+"  count= "+statistics1.getCount() 
+		+ "  sum= "+statistics1.getSum());
 	}
 
 }
