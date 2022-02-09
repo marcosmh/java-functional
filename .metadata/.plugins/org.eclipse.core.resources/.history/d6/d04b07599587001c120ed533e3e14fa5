@@ -1,0 +1,39 @@
+package com.streams;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
+
+public class StreamsTest {
+
+	private static List<User> users;
+	
+	public static void main(String[] args) {
+		
+		setupUser();
+		//Stream stream = Stream.of(users);
+		
+		users.stream().forEach( e -> e.setNombre( e.getNombre() + " X" )     );
+		imprimirLista();
+
+	}
+	
+	
+	private static void setupUser() {
+		users = new ArrayList<>();
+		users.add(new User(1,"Marcos"));
+		users.add(new User(2,"Juan"));
+		users.add(new User(3,"Carlos"));
+		users.add(new User(4,"Mario"));
+		users.add(new User(5,"Hector"));
+		
+	}
+	
+	private static void imprimirLista() {
+		users.stream().forEach( e-> System.out.println(e.getId() + " " + e.getNombre()) );
+	}
+	
+	
+
+}
+  

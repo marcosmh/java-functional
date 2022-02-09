@@ -10,6 +10,3 @@
 *.sig
 .DS_Store
 
-pkg/
-src/
-/.metadata/

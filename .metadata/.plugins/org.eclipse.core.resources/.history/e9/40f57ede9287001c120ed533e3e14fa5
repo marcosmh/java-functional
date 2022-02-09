@@ -1,0 +1,27 @@
+package com.streams;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class StreamsTest {
+
+	private static List<User> users;
+	
+	public static void main(String[] args) {
+		
+
+		
+
+	}
+	
+	
+	private static void setupUser() {
+		users = new ArrayList<>();
+		users.add(new User(1,"Marcos"));
+	}
+	
+	
+	
+
+}
+ 
