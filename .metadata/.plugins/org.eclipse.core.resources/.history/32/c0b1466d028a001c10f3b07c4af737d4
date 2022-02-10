@@ -7,8 +7,10 @@ import java.util.DoubleSummaryStatistics;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class StreamsTest {
 
@@ -54,13 +56,7 @@ public class StreamsTest {
 				
 		//testSummarizingDouble();
 		
-		//testPartitionBy();
-		
-		//testGroupingBy();
-		
-		//testMapping();
-		
-		testStreamParalelo();
+		testPartitionBy();
 
 	}
 
@@ -277,53 +273,9 @@ public class StreamsTest {
 		System.out.println("--------- use groupingBy --------- ");
 		Map<Character, List<User>> grupoAlfabetico = users.stream()
 				.collect(Collectors.groupingBy(e -> new Character(e.getNombre().charAt(0))));
+		grupoAlfabetico.get('M').stream()
+										    .forEach( e -> System.out.println(e));
 		
-		grupoAlfabetico.get('M').stream().forEach( e -> System.out.println(e.getNombre()));
-		grupoAlfabetico.get('C').stream().forEach( e -> System.out.println(e.getNombre()));
-		grupoAlfabetico.get('H').stream().forEach( e -> System.out.println(e.getNombre()));
-		
-	}
-	
-	private static void testMapping() {
-		System.out.println("--------- use mapping --------- ");
-		List<String> personas = users.stream()
-				.collect(Collectors.mapping(User::getNombre, Collectors.toList()));
-		
-		personas.stream().forEach(e-> System.out.println(e));
-	}
-	
-	private static void testStreamParalelo() {
-		System.out.println("--------- use streamParalelo --------- ");
-		long tiempo1 = System.currentTimeMillis();
-		System.out.println("tiempo1= "+tiempo1);
-		
-		List<String> lista = users.stream().map(e -> e.getNombre()).collect(Collectors.toList());
-		lista.stream().forEach(e -> convertirAMayusculas(e));
-		
-		long tiempo2 = System.currentTimeMillis();
-		System.out.println("tiempo2= "+tiempo2);
-		
-		System.out.println("x= "+ (tiempo2 - tiempo1));
-		
-		System.out.println("====================================== ");
-		 tiempo1 = System.currentTimeMillis();
-		 System.out.println("tiempo1= "+tiempo1);
-		 lista.parallelStream().forEach(e -> convertirAMayusculas(e));
-		 tiempo2 = System.currentTimeMillis();
-		 System.out.println("tiempo2= "+tiempo2);
-		 System.out.println("parallelStream= "+ (tiempo2 - tiempo1));
-		
-		
-		
-	}
-	
-	private static String convertirAMayusculas(String nombre) {
-		try {
-			Thread.sleep(1000);
-		} catch(InterruptedException e) {
-			e.printStackTrace();
-		}
-		return nombre.toString();
 	}
 
 }

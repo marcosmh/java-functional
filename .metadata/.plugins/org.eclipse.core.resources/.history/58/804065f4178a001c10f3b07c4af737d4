@@ -7,8 +7,10 @@ import java.util.DoubleSummaryStatistics;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class StreamsTest {
 
@@ -305,13 +307,10 @@ public class StreamsTest {
 		
 		System.out.println("x= "+ (tiempo2 - tiempo1));
 		
-		System.out.println("====================================== ");
 		 tiempo1 = System.currentTimeMillis();
-		 System.out.println("tiempo1= "+tiempo1);
 		 lista.parallelStream().forEach(e -> convertirAMayusculas(e));
 		 tiempo2 = System.currentTimeMillis();
-		 System.out.println("tiempo2= "+tiempo2);
-		 System.out.println("parallelStream= "+ (tiempo2 - tiempo1));
+		
 		
 		
 		
